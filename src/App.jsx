@@ -13,26 +13,32 @@ const pageConfigs = {
   '/': {
     seo: seoPages.home,
     serviceKey: null,
+    isCustomPage: false,
   },
   '/renovation': {
     seo: seoPages.renovation,
     serviceKey: 'renovation',
+    isCustomPage: false,
   },
   '/historic-restoration': {
     seo: seoPages.historicRestoration,
     serviceKey: 'historicRestoration',
+    isCustomPage: false,
   },
   '/heritage': {
     seo: seoPages.heritage,
     serviceKey: 'heritage',
+    isCustomPage: false,
   },
   '/real-estate': {
     seo: seoPages.realEstate,
     serviceKey: 'realEstate',
+    isCustomPage: false,
   },
   '/international-buyers': {
     seo: seoPages.internationalBuyers,
     serviceKey: 'internationalBuyers',
+    isCustomPage: true,
   },
 }
 
@@ -218,7 +224,7 @@ function App() {
     }
   ]
 
-  const currentServicePage = currentPage.serviceKey && currentPage.serviceKey !== 'internationalBuyers'
+  const currentServicePage = currentPage.serviceKey && !currentPage.isCustomPage
     ? serviceContent[currentPage.serviceKey]
     : null
 
@@ -306,7 +312,7 @@ function App() {
 
       {isFormOpen && <ConsultationForm onClose={() => setIsFormOpen(false)} />}
 
-      {pathname === '/international-buyers' ? (
+      {currentPage.isCustomPage ? (
         <InternationalBuyersPage
           navigateTo={navigateTo}
           setIsFormOpen={setIsFormOpen}

@@ -44,7 +44,7 @@ export const serviceContent = {
     whySection: {
       heading: 'Why Clients Choose Us',
       items: [
-        'A completed portfolio across Italy\'s most prestigious locations',
+        'A complete portfolio across Italy\'s most prestigious locations',
         'Direct experience supporting overseas owners and managing projects remotely',
         'A discreet, relationship-driven approach with no unnecessary complexity',
         'Coordination with licensed architects, geometricians and specialist trades',
