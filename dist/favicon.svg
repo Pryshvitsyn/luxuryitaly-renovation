@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">Elio Genesis favicon</title>
+  <desc id="desc">Gold EG monogram on a dark background</desc>
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="75%">
+      <stop offset="0%" stop-color="#3f3b2d" />
+      <stop offset="60%" stop-color="#1b1a17" />
+      <stop offset="100%" stop-color="#0b0b0a" />
+    </radialGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff3bf" />
+      <stop offset="18%" stop-color="#f5d76a" />
+      <stop offset="45%" stop-color="#d8a928" />
+      <stop offset="70%" stop-color="#fff0a6" />
+      <stop offset="100%" stop-color="#b88311" />
+    </linearGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="1.4" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="64" height="64" rx="14" fill="url(#bg)" />
+  <circle cx="32" cy="32" r="24" fill="none" stroke="url(#gold)" stroke-width="1.5" opacity="0.35" />
+
+  <g fill="none" stroke="url(#gold)" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)">
+    <path d="M20 18v28" stroke-width="4.6" />
+    <path d="M20 18h19" stroke-width="4.6" />
+    <path d="M20 32h15" stroke-width="4.1" opacity="0.95" />
+    <path d="M20 46h19" stroke-width="4.6" />
+
+    <path d="M46 20c-3.5-2.4-7.4-2.8-10.8-.7-3.7 2.3-5.7 6.7-5.7 12.4 0 5.3 1.9 9.8 5.3 12.2 3.6 2.5 7.8 2.3 11.4-.6" stroke-width="4.6" />
+    <path d="M46 32H36.5" stroke-width="4.1" />
+  </g>
+</svg>

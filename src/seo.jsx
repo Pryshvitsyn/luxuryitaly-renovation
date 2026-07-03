@@ -81,6 +81,14 @@ export const seoPages = {
     keywords:
       'luxury real estate Italy, Italian property sales, villas for sale Italy, prestige real estate Italy',
   },
+  internationalBuyers: {
+    path: '/international-buyers',
+    title: 'Buying & Renovating Property in Italy | Services for International Owners',
+    description:
+      'Full-service support for international buyers acquiring, renovating and maintaining luxury property in Italy — from acquisition and documentation to renovation oversight and long-term care.',
+    keywords:
+      'buying property Italy international, renovating property Italy overseas, luxury property Italy foreign buyers, villa renovation Italy international owners, property purchase Italy abroad',
+  },
 }
 
 export function SEO({ page, pathname }) {

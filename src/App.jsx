@@ -1,10 +1,13 @@
-import { useState, useEffect, useMemo } from 'react'
-import { CheckCircle2, ChevronRight, ArrowRight, Star, ExternalLink, ShieldCheck, MessageCircle, Calendar, Home, Building2, Landmark, KeyRound } from 'lucide-react'
+import { useState, useEffect } from 'react'
+import { CheckCircle2, ChevronRight, ArrowRight, Star, ExternalLink, ShieldCheck, MessageCircle, Calendar, Home, Building2, Landmark, KeyRound, Globe } from 'lucide-react'
 import BeforeAfterSlider from './components/BeforeAfterSlider'
 import ProjectDetailsModal from './components/ProjectDetailsModal'
 import { useLanguage } from './useLanguage'
 import ConsultationForm from './components/ConsultationForm'
 import { SEO, seoPages } from './seo'
+import RichServicePage from './pages/RichServicePage'
+import InternationalBuyersPage from './pages/InternationalBuyersPage'
+import { serviceContent } from './pages/serviceContent'
 
 const pageConfigs = {
   '/': {
@@ -27,6 +30,10 @@ const pageConfigs = {
     seo: seoPages.realEstate,
     serviceKey: 'realEstate',
   },
+  '/international-buyers': {
+    seo: seoPages.internationalBuyers,
+    serviceKey: 'internationalBuyers',
+  },
 }
 
 const serviceIcons = {
@@ -34,6 +41,44 @@ const serviceIcons = {
   historicRestoration: Landmark,
   heritage: Building2,
   realEstate: KeyRound,
+}
+
+function ServiceLinks({ navigateTo }) {
+  return (
+    <section className="py-20 bg-slate-50 border-y border-slate-200">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center max-w-3xl mx-auto mb-12">
+          <h2 className="text-sm font-bold tracking-widest text-brand-blue uppercase mb-4">Our Services</h2>
+          <h3 className="text-3xl md:text-4xl font-serif text-slate-900 mb-6">Explore our dedicated service pages</h3>
+          <p className="text-lg text-slate-600">Each service carries its own dedicated page with focused expertise, detailed process guidance and specific answers for the clients it serves.</p>
+        </div>
+        <div className="grid md:grid-cols-2 xl:grid-cols-5 gap-5">
+          {[
+            { path: '/renovation', label: 'Renovation', Icon: serviceIcons.renovation },
+            { path: '/historic-restoration', label: 'Historic Restoration', Icon: serviceIcons.historicRestoration },
+            { path: '/heritage', label: 'Heritage', Icon: serviceIcons.heritage },
+            { path: '/real-estate', label: 'Real Estate', Icon: serviceIcons.realEstate },
+            { path: '/international-buyers', label: 'International Buyers', Icon: Globe },
+          ].map((item) => {
+            const Icon = item.Icon
+            return (
+              <button
+                key={item.path}
+                onClick={() => navigateTo(item.path)}
+                className="text-left bg-white p-7 rounded-2xl border border-slate-200 hover:border-brand-blue/30 hover:shadow-xl transition-all duration-300 group"
+              >
+                <Icon className="w-10 h-10 text-brand-blue mb-5 group-hover:scale-110 transition-transform" />
+                <h4 className="text-xl font-bold text-slate-900 mb-2">{item.label}</h4>
+                <span className="inline-flex items-center gap-2 text-brand-blue font-medium text-sm mt-2">
+                  View page <ChevronRight className="w-4 h-4" />
+                </span>
+              </button>
+            )
+          })}
+        </div>
+      </div>
+    </section>
+  )
 }
 
 function normalizePath(pathname) {
@@ -173,154 +218,9 @@ function App() {
     }
   ]
 
-  const serviceLandingPages = useMemo(() => ({
-    renovation: {
-      eyebrow: 'Luxury Renovation in Italy',
-      title: 'Elegant renovations for villas, apartments and exceptional Italian estates.',
-      intro: 'We manage luxury renovation in Italy with a turnkey approach that protects design intent, budget clarity and construction quality from concept to completion.',
-      highlights: [
-        'Turnkey renovation planning and project coordination',
-        'Interior upgrades, layout improvement and refined finishes',
-        'Support for overseas owners and second-home investors',
-      ],
-    },
-    historicRestoration: {
-      eyebrow: 'Historic Restoration in Italy',
-      title: 'Restoring period homes with respect for architecture, provenance and modern comfort.',
-      intro: 'Our historic restoration work balances heritage preservation with discreet modernization, helping remarkable Italian properties regain beauty, function and long-term value.',
-      highlights: [
-        'Sensitive restoration of period details and original character',
-        'Coordination with architects, geometricians and local requirements',
-        'Comfort, usability and value enhancement without losing identity',
-      ],
-    },
-    heritage: {
-      eyebrow: 'Heritage Property Services',
-      title: 'Strategic guidance for heritage properties that deserve careful stewardship.',
-      intro: 'For owners of architecturally significant homes and estates, we provide preservation-minded planning, design advisory and a practical path toward elegant contemporary use.',
-      highlights: [
-        'Preservation strategy for historic and culturally sensitive assets',
-        'Design and restoration planning before works begin',
-        'Long-term thinking for maintenance, use and presentation',
-      ],
-    },
-    realEstate: {
-      eyebrow: 'Luxury Real Estate in Italy',
-      title: 'Partner-led property sales with renovation and restoration insight built in.',
-      intro: 'Through trusted real-estate relationships, we help identify promising properties and evaluate their renovation, restoration and long-term investment potential in Italy.',
-      highlights: [
-        'Curated opportunities through trusted partner relationships',
-        'Early vision for restructuring, restoration and finish potential',
-        'A smoother path from acquisition to transformation',
-      ],
-    },
-  }), [])
-
-  const currentServicePage = currentPage.serviceKey ? serviceLandingPages[currentPage.serviceKey] : null
-
-  const ServiceLinks = () => (
-    <section className="py-20 bg-slate-50 border-y border-slate-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <h2 className="text-sm font-bold tracking-widest text-brand-blue uppercase mb-4">SEO Service Pages</h2>
-          <h3 className="text-3xl md:text-4xl font-serif text-slate-900 mb-6">Explore our dedicated service pages</h3>
-          <p className="text-lg text-slate-600">Built for luxuryitaly.net, these pages preserve the same premium identity while giving each service its own focused SEO destination.</p>
-        </div>
-
-        <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
-          {[
-            { key: 'renovation', path: '/renovation', label: 'Renovation' },
-            { key: 'historicRestoration', path: '/historic-restoration', label: 'Historic Restoration' },
-            { key: 'heritage', path: '/heritage', label: 'Heritage' },
-            { key: 'realEstate', path: '/real-estate', label: 'Real Estate' },
-          ].map((item) => {
-            const Icon = serviceIcons[item.key]
-            return (
-              <button
-                key={item.path}
-                onClick={() => navigateTo(item.path)}
-                className="text-left bg-white p-7 rounded-2xl border border-slate-200 hover:border-brand-blue/30 hover:shadow-xl transition-all duration-300 group"
-              >
-                <Icon className="w-10 h-10 text-brand-blue mb-5 group-hover:scale-110 transition-transform" />
-                <h4 className="text-xl font-bold text-slate-900 mb-2">{item.label}</h4>
-                <p className="text-slate-600 mb-4">{serviceLandingPages[item.key].intro}</p>
-                <span className="inline-flex items-center gap-2 text-brand-blue font-medium">
-                  Open page <ChevronRight className="w-4 h-4" />
-                </span>
-              </button>
-            )
-          })}
-        </div>
-      </div>
-    </section>
-  )
-
-  const ServicePage = ({ page }) => (
-    <main>
-      <section className="relative pt-32 pb-20 lg:pt-44 lg:pb-28 overflow-hidden min-h-[72vh] flex items-center">
-        <div className="absolute inset-0 z-0 bg-slate-900">
-          {heroImages.map((src, idx) => (
-            <img
-              key={src}
-              src={src}
-              alt="Luxury Italian Architecture"
-              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${idx === currentHeroIndex ? 'opacity-100' : 'opacity-0'}`}
-            />
-          ))}
-          <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-900/75 to-slate-900/40"></div>
-        </div>
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-          <div className="lg:w-2/3">
-            <p className="text-sm font-bold tracking-[0.24em] text-brand-blue uppercase mb-5">{page.eyebrow}</p>
-            <h1 className="text-4xl md:text-6xl font-serif font-medium text-white leading-tight mb-8">{page.title}</h1>
-            <p className="text-xl text-slate-200 mb-10 max-w-2xl leading-relaxed font-light">{page.intro}</p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <button onClick={() => setIsFormOpen(true)} className="bg-brand-blue hover:bg-brand-blue/80 text-white px-8 py-4 rounded-full text-base font-medium transition-all duration-300 flex justify-center items-center gap-2 group">
-                {t('nav.consultation')}
-                <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </button>
-              <button onClick={() => navigateTo('/')} className="bg-white/10 backdrop-blur-md hover:bg-white/20 border border-white/20 text-white px-8 py-4 rounded-full text-base font-medium transition-all duration-300 flex justify-center items-center gap-2">
-                Return to homepage
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-[1.15fr,0.85fr] gap-12 items-start">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-serif text-slate-900 mb-6">A page built for search visibility and premium conversion</h2>
-              <p className="text-lg text-slate-600 leading-relaxed mb-8">This destination is designed for the future luxuryitaly.net domain strategy: clear service intent, elegant messaging, and stronger relevance for users searching specifically for renovation, restoration, heritage and real-estate expertise in Italy.</p>
-              <div className="space-y-4">
-                {page.highlights.map((highlight) => (
-                  <div key={highlight} className="flex gap-4 items-start bg-slate-50 border border-slate-100 rounded-2xl p-5">
-                    <CheckCircle2 className="w-6 h-6 text-brand-blue mt-0.5 flex-shrink-0" />
-                    <p className="text-slate-700">{highlight}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="bg-slate-900 text-white p-8 rounded-3xl shadow-2xl">
-              <p className="text-sm font-bold tracking-widest uppercase text-brand-blue mb-4">Why this structure works</p>
-              <h3 className="text-2xl font-serif mb-6">Safe SEO growth without changing the core brand experience</h3>
-              <ul className="space-y-4 text-slate-300 leading-relaxed">
-                <li>• Dedicated URL for a focused search topic</li>
-                <li>• Unique title, description and canonical targeting luxuryitaly.net</li>
-                <li>• Same premium look and feel as the homepage</li>
-                <li>• Clear conversion path into consultation and acquisition support</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <ServiceLinks />
-    </main>
-  )
+  const currentServicePage = currentPage.serviceKey && currentPage.serviceKey !== 'internationalBuyers'
+    ? serviceContent[currentPage.serviceKey]
+    : null
 
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
@@ -340,6 +240,9 @@ function App() {
               <a href="#portfolio" className="text-slate-600 hover:text-brand-blue px-3 py-2 text-sm font-medium transition-colors">{t('nav.portfolio')}</a>
               <a href="#testimonials" className="text-slate-600 hover:text-brand-blue px-3 py-2 text-sm font-medium transition-colors">{t('nav.testimonials')}</a>
               <a href="#credentials" className="text-slate-600 hover:text-brand-blue px-3 py-2 text-sm font-medium transition-colors">{t('nav.credentials')}</a>
+              <button onClick={() => navigateTo('/international-buyers')} className="text-slate-600 hover:text-brand-blue px-3 py-2 text-sm font-medium transition-colors flex items-center gap-1">
+                <Globe className="w-4 h-4" /> International
+              </button>
             </div>
 
             <div className="hidden lg:flex items-center gap-4">
@@ -403,8 +306,21 @@ function App() {
 
       {isFormOpen && <ConsultationForm onClose={() => setIsFormOpen(false)} />}
 
-      {currentServicePage ? (
-        <ServicePage page={currentServicePage} />
+      {pathname === '/international-buyers' ? (
+        <InternationalBuyersPage
+          navigateTo={navigateTo}
+          setIsFormOpen={setIsFormOpen}
+          currentHeroIndex={currentHeroIndex}
+          heroImages={heroImages}
+        />
+      ) : currentServicePage ? (
+        <RichServicePage
+          content={currentServicePage}
+          navigateTo={navigateTo}
+          setIsFormOpen={setIsFormOpen}
+          currentHeroIndex={currentHeroIndex}
+          heroImages={heroImages}
+        />
       ) : (
         <>
           <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden min-h-[90vh] flex items-center">
@@ -492,7 +408,98 @@ function App() {
             </div>
           </section>
 
-          <ServiceLinks />
+          <ServiceLinks navigateTo={navigateTo} />
+
+          {/* International Owners Section */}
+          <section id="international" className="py-24 bg-white border-t border-slate-100">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center max-w-3xl mx-auto mb-14">
+                <h2 className="text-sm font-bold tracking-widest text-brand-blue uppercase mb-4">International Ownership</h2>
+                <h3 className="text-3xl md:text-4xl font-serif text-slate-900 mb-6">A Trusted Partner for International Property Owners in Italy</h3>
+                <p className="text-lg text-slate-600">From acquisition to renovation and long-term care, we support owners across the full journey — wherever in the world they are based.</p>
+              </div>
+              <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-6 mb-10">
+                {[
+                  {
+                    title: 'Buying Support in Italy',
+                    desc: 'We coordinate with legal, notarial and acquisition advisors to simplify the purchase process for buyers based outside Italy.',
+                  },
+                  {
+                    title: 'Documentation and Local Coordination',
+                    desc: 'Permits, municipal approvals and technical documentation are managed on your behalf throughout the renovation process.',
+                  },
+                  {
+                    title: 'Renovation Oversight for Owners Abroad',
+                    desc: 'We act as your trusted representative on the ground, with structured reporting and a single point of contact throughout every project.',
+                  },
+                  {
+                    title: 'Long-Term Maintenance and Continuity',
+                    desc: 'After delivery, we provide ongoing property care and oversight for owners who visit seasonally or manage their Italian property from abroad.',
+                  },
+                ].map((item) => (
+                  <div key={item.title} className="bg-slate-50 border border-slate-100 rounded-2xl p-7 hover:border-brand-blue/30 hover:shadow-lg transition-all duration-300">
+                    <Globe className="w-8 h-8 text-brand-blue mb-5" />
+                    <h4 className="text-lg font-bold text-slate-900 mb-3">{item.title}</h4>
+                    <p className="text-slate-600 leading-relaxed text-sm">{item.desc}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="text-center">
+                <button
+                  onClick={() => navigateTo('/international-buyers')}
+                  className="inline-flex items-center gap-2 bg-brand-blue hover:bg-brand-blue/80 text-white px-8 py-4 rounded-full text-base font-medium transition-all duration-300 group"
+                >
+                  Services for International Buyers
+                  <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </button>
+              </div>
+            </div>
+          </section>
+
+          {/* Process Section */}
+          <section id="process" className="py-24 bg-slate-900 text-white">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center max-w-3xl mx-auto mb-14">
+                <h2 className="text-sm font-bold tracking-widest text-brand-blue uppercase mb-4">How We Work</h2>
+                <h3 className="text-3xl md:text-4xl font-serif mb-6">A clear, structured process from first conversation to final handover.</h3>
+              </div>
+              <div className="grid md:grid-cols-5 gap-6">
+                {[
+                  {
+                    step: '01',
+                    title: 'Private Consultation',
+                    desc: 'We begin with a confidential conversation to understand your property, your intentions and the scope of what you are looking for.',
+                  },
+                  {
+                    step: '02',
+                    title: 'Property Review or Acquisition Brief',
+                    desc: 'Whether you already own a property or are in the process of searching, we assess the opportunity and establish a clear picture of what is possible.',
+                  },
+                  {
+                    step: '03',
+                    title: 'Design and Feasibility Coordination',
+                    desc: 'Working with your preferred architect or our own trusted professionals, we develop a design and feasibility framework before any works are commissioned.',
+                  },
+                  {
+                    step: '04',
+                    title: 'Renovation and Restoration Execution',
+                    desc: 'We oversee the entire construction and restoration process, managing contractors, quality and timeline on your behalf.',
+                  },
+                  {
+                    step: '05',
+                    title: 'Handover and Aftercare',
+                    desc: 'On completion, we conduct a thorough snagging and quality check before handover, and remain available for ongoing maintenance and care.',
+                  },
+                ].map((item) => (
+                  <div key={item.step} className="relative">
+                    <div className="text-5xl font-serif font-bold text-brand-blue/20 mb-4 leading-none">{item.step}</div>
+                    <h4 className="text-lg font-bold text-white mb-3">{item.title}</h4>
+                    <p className="text-slate-400 text-sm leading-relaxed">{item.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
 
           <section id="portfolio" className="py-24 bg-slate-900 text-white clip-path-diagonal">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 pt-24">
@@ -689,12 +696,60 @@ function App() {
             </div>
           </section>
 
-          <footer className="bg-slate-900 text-white py-12 border-t border-slate-800">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-slate-400">
-              <button onClick={() => navigateTo('/')} className="text-2xl font-serif font-bold tracking-tight text-white block mb-4 mx-auto">
-                Elio<span className="text-brand-blue">Genesis</span>
-              </button>
-              <p>{t('footer.copyright')}</p>
+          <footer className="bg-slate-900 text-white py-16 border-t border-slate-800">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="grid md:grid-cols-3 gap-12 mb-12">
+                <div>
+                  <button onClick={() => navigateTo('/')} className="text-2xl font-serif font-bold tracking-tight text-white mb-4 block">
+                    Elio<span className="text-brand-blue">Genesis</span>
+                  </button>
+                  <p className="text-slate-400 text-sm leading-relaxed">Luxury renovation, historic restoration and heritage property services in Italy — for private owners and international clients worldwide.</p>
+                </div>
+                <div>
+                  <p className="text-sm font-bold tracking-widest uppercase text-brand-blue mb-5">Our Services</p>
+                  <ul className="space-y-2">
+                    {[
+                      { label: 'Luxury Renovation', path: '/renovation' },
+                      { label: 'Historic Restoration', path: '/historic-restoration' },
+                      { label: 'Heritage Services', path: '/heritage' },
+                      { label: 'Real Estate', path: '/real-estate' },
+                      { label: 'International Buyers', path: '/international-buyers' },
+                    ].map((link) => (
+                      <li key={link.path}>
+                        <button
+                          onClick={() => navigateTo(link.path)}
+                          className="text-slate-400 hover:text-brand-blue transition-colors text-sm flex items-center gap-2 group"
+                        >
+                          <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                          {link.label}
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <p className="text-sm font-bold tracking-widest uppercase text-brand-blue mb-5">Contact</p>
+                  <a
+                    href="https://wa.me/393519363404?text=Hello%20I%20would%20like%20a%20consultation"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-slate-400 hover:text-brand-blue transition-colors text-sm mb-4 block"
+                  >
+                    <MessageCircle className="w-4 h-4" /> WhatsApp Consultation
+                  </a>
+                  <a
+                    href="https://www.facebook.com/kathleen.canape"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-slate-400 hover:text-brand-blue transition-colors text-sm block"
+                  >
+                    Kathleen Canape — Real Estate Advisor
+                  </a>
+                </div>
+              </div>
+              <div className="border-t border-slate-800 pt-8 text-center text-slate-500 text-sm">
+                <p>{t('footer.copyright')}</p>
+              </div>
             </div>
           </footer>
         </>
