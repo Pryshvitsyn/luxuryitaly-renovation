@@ -55,8 +55,8 @@ function ServiceLinks({ navigateTo }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-12">
           <h2 className="text-sm font-bold tracking-widest text-brand-blue uppercase mb-4">Our Services</h2>
-          <h3 className="text-3xl md:text-4xl font-serif text-slate-900 mb-6">Explore our dedicated service pages</h3>
-          <p className="text-lg text-slate-600">Each service carries its own dedicated page with focused expertise, detailed process guidance and specific answers for the clients it serves.</p>
+          <h3 className="text-3xl md:text-4xl font-serif text-slate-900 mb-6">Every service, refined to the highest standard</h3>
+          <p className="text-lg text-slate-600">From luxury renovation to heritage preservation, each discipline is managed with the same exacting standards and personal attention that define every Elio Genesis project.</p>
         </div>
         <div className="grid md:grid-cols-2 xl:grid-cols-5 gap-5">
           {[
@@ -76,7 +76,7 @@ function ServiceLinks({ navigateTo }) {
                 <Icon className="w-10 h-10 text-brand-blue mb-5 group-hover:scale-110 transition-transform" />
                 <h4 className="text-xl font-bold text-slate-900 mb-2">{item.label}</h4>
                 <span className="inline-flex items-center gap-2 text-brand-blue font-medium text-sm mt-2">
-                  View page <ChevronRight className="w-4 h-4" />
+                  Learn more <ChevronRight className="w-4 h-4" />
                 </span>
               </button>
             )
