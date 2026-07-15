@@ -222,10 +222,9 @@ function App() {
     <section className="py-20 bg-slate-50 border-y border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <h2 className="text-sm font-bold tracking-widest text-brand-blue uppercase mb-4">SEO Service Pages</h2>
+          <h2 className="text-sm font-bold tracking-widest text-brand-blue uppercase mb-4">Service Pages</h2>
           <h3 className="text-3xl md:text-4xl font-serif text-slate-900 mb-6">Explore our dedicated service pages</h3>
-          <p className="text-lg text-slate-600">Built for luxuryitaly.net, these pages preserve the same premium identity while giving each service its own focused SEO destination.</p>
-        </div>
+          <p className="text-lg text-slate-600">Explore each of our core services in detail. Every page is designed to give you clear, practical information while reflecting the same premium standard you expect from Luxury Italy Renovation </div>
 
         <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
           {[
